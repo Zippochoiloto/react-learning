@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import TodoItem from "./componenets/TodoItem";
+import TrafficLight from "./componenets/TrafficLight";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const RED = 0;
+const ORANGE = 1;
+const GREEN = 2;
+class App extends Component {
+  constructor() {
+    super();
+    const todoItems = ["Work", "Play", "Sleep"];
+    this.state = {
+      currentColor: GREEN,
+    };
+    setInterval(() => {
+      // console.log(this.state.currentColor);
+      this.setState({
+        currentColor: this.getNextColor(this.state.currentColor),
+      });
+    }, 1000);
+  }
+
+  getNextColor(color) {
+    switch (color) {
+      case RED:
+        return ORANGE;
+      case ORANGE:
+        return GREEN;
+      default:
+        return RED;
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        {this.todoItems.length > 0 &&
+          this.todoItems.map((item, index) => (
+            <TodoItem key={index} item={item} />
+          ))}
+        {this.todoItems.length === 0 && "Nothing here"}
+        <TrafficLight currentColor={this.state.currentColor} />}
+      </div>
+    );
+  }
 }
 
 export default App;
