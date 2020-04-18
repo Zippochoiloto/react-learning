@@ -8,10 +8,8 @@
   padding: 20px;
 }
 
-.TodoItem > p {
-  margin: 0;
-  padding: 10px 5px;
-  border-bottom: 1px solid #eee;
+.TodoItem > img {
+  margin: 0 10px;
 }
 .TodoItem-complete {
   text-decoration: line-through;
